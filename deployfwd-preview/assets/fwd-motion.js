@@ -7,6 +7,18 @@
     return clamp(-rect.top / travel);
   }
 
+  function updateMobileReview() {
+    const cta = document.querySelector("[data-mobile-cta]");
+    const trigger = document.querySelector("#problem");
+    const close = document.querySelector("#close");
+    if (!cta || !trigger || !close) return;
+    const visible =
+      window.innerWidth <= 700 &&
+      trigger.getBoundingClientRect().top < window.innerHeight * 0.55 &&
+      close.getBoundingClientRect().top > window.innerHeight * 0.72;
+    cta.classList.toggle("is-visible", visible);
+  }
+
   function updateLock() {
     const section = document.querySelector("[data-fm-lock]");
     if (!section) return;
@@ -75,12 +87,38 @@
       raf = 0;
       updateLock();
       updateFolio();
+      updateMobileReview();
     });
   }
 
   window.addEventListener("scroll", requestUpdate, { passive: true });
   window.addEventListener("resize", requestUpdate);
   window.addEventListener("load", requestUpdate);
+
+  document.querySelectorAll("[data-copy-email]").forEach((button) => {
+    button.addEventListener("click", async () => {
+      const email = button.getAttribute("data-copy-email") || "";
+      const status = button.parentElement && button.parentElement.querySelector("[data-copy-status]");
+      try {
+        if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(email);
+        } else {
+          const input = document.createElement("input");
+          input.value = email;
+          input.setAttribute("readonly", "");
+          input.style.position = "fixed";
+          input.style.opacity = "0";
+          document.body.appendChild(input);
+          input.select();
+          document.execCommand("copy");
+          input.remove();
+        }
+        if (status) status.textContent = "Copied";
+      } catch (_) {
+        if (status) status.textContent = email;
+      }
+    });
+  });
 
   if (window.ScrollCraft) {
     window.ScrollCraft.mount(document.body);
