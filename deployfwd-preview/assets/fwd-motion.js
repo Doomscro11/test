@@ -10,12 +10,18 @@
   function updateMobileReview() {
     const cta = document.querySelector("[data-mobile-cta]");
     const trigger = document.querySelector("#problem");
+    const peak = document.querySelector("#lock");
     const close = document.querySelector("#close");
-    if (!cta || !trigger || !close) return;
+    if (!cta || !trigger || !peak || !close) return;
+    const peakRect = peak.getBoundingClientRect();
+    const peakActive =
+      peakRect.top < window.innerHeight * 0.72 &&
+      peakRect.bottom > window.innerHeight * 0.28;
     const visible =
       window.innerWidth <= 700 &&
       trigger.getBoundingClientRect().top < window.innerHeight * 0.55 &&
-      close.getBoundingClientRect().top > window.innerHeight * 0.72;
+      close.getBoundingClientRect().top > window.innerHeight * 0.72 &&
+      !peakActive;
     cta.classList.toggle("is-visible", visible);
   }
 
