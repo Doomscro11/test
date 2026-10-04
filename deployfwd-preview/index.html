@@ -33,18 +33,25 @@
   <main id="main">
     <section class="df-hero-act" data-sc-act="pin" data-sc-span="2.3">
       <div data-sc-stage class="df-split-stage df-hero-stage">
+        <div class="df-ops-rail" aria-hidden="true">
+          <span>DF/OPS</span>
+          <i></i>
+          <span>SUPERVISED</span>
+          <span>04 HANDOFF DOMAINS</span>
+          <span>AUDIT 10–14D</span>
+        </div>
         <div class="df-half df-half-manual">
-          <div class="df-corner-mark">Deploy FWD</div>
+          <div class="df-corner-mark"><b>Deploy</b><span>FWD</span></div>
           <div class="df-hero-copy">
             <p class="df-label">The operation you have</p>
             <h1>People carry<br>the process.</h1>
             <p>Quotes, ETAs, schedules, and client updates survive because somebody remembers what happens next.</p>
           </div>
           <div class="df-handoff-stack" aria-hidden="true">
-            <span>RFQ waiting</span>
-            <span>Supplier ETA?</span>
-            <span>Schedule changed</span>
-            <span>Client asking again</span>
+            <span data-code="Q-17">RFQ waiting</span>
+            <span data-code="S-08">Supplier ETA?</span>
+            <span data-code="J-31">Schedule changed</span>
+            <span data-code="C-12">Client asking again</span>
           </div>
         </div>
 
@@ -56,7 +63,7 @@
             <p>A supervised operating layer moves the work between people and tools, with human judgment held exactly where it belongs.</p>
           </div>
           <div class="df-loop-mini" aria-hidden="true">
-            <span>Quote</span><i></i><span>Schedule</span><i></i><span>Supplier</span><i></i><span>Status</span>
+            <span data-state="01">Quote</span><i></i><span data-state="02">Schedule</span><i></i><span data-state="03">Supplier</span><i></i><span data-state="04">Status</span>
           </div>
         </div>
 
@@ -94,6 +101,7 @@
         </div>
 
         <figure class="df-turn-figure" data-sc-reveal="left" data-sc-reveal-at="0.12 0.58">
+          <div class="df-scan-corners" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
           <img
             src="assets/deploy-fwd/hero-workflow-1120.webp"
             srcset="assets/deploy-fwd/hero-workflow-480.webp 480w, assets/deploy-fwd/hero-workflow-720.webp 720w, assets/deploy-fwd/hero-workflow-1120.webp 1120w"
@@ -101,7 +109,7 @@
             width="1120" height="630"
             loading="lazy" decoding="async"
             alt="Machinist ruler, pen, brass caliper and blank paper on a dark walnut surface">
-          <figcaption>Start with the real workflow. Then decide what earns automation.</figcaption>
+          <figcaption><span>FIELD / 01</span><strong>Start with the real workflow. Then decide what earns automation.</strong><em>OBSERVE → MAP → CONTROL</em></figcaption>
         </figure>
       </div>
     </section>
@@ -142,7 +150,7 @@
           <h2>Audit first. Deployment earns the right to expand.</h2>
         </div>
 
-        <div class="df-proof-steps">
+        <div class="df-proof-steps" data-register="ENGAGEMENT REGISTER">
           <article data-sc-in>
             <span>Audit</span>
             <strong>$2,000</strong>
@@ -183,6 +191,7 @@
 
         <div class="df-collapse-system">
           <div class="df-system-copy">
+            <div class="df-system-state" aria-hidden="true"><span>STATE</span><strong>CONTROLLED</strong><i></i></div>
             <p class="df-label">After</p>
             <h2>The operating loop remembers.</h2>
             <p>Human judgment stays visible. Context persists. The next action has an owner even when nobody is carrying it in their head.</p>
