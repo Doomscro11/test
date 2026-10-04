@@ -448,7 +448,7 @@
 .fm-tile {
   min-width: 0;
   min-height: 0;
-  background-image: url("fwd-motion/hero-method-1600.webp");
+  background-image: url("fwd-motion/world-frame-960.webp");
   background-repeat: no-repeat;
   background-size: 200% 200%;
   will-change: transform, filter;
@@ -752,6 +752,8 @@
 }
 
 @media (max-width: 700px) {
+  .fm-tile { background-image: url("fwd-motion/world-frame-720.webp"); }
+
   .fm-title-inner {
     padding-bottom: 22px;
   }
