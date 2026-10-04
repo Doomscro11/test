@@ -1463,3 +1463,141 @@
 @media (prefers-reduced-motion: reduce) {
   .fm-frame-index { opacity: .65; }
 }
+
+
+/* ============================================================
+   Density pass — tighten narrative chapters, preserve title + Lock
+   ============================================================ */
+#problem,
+#method,
+#system {
+  padding-block: clamp(76px, 8.4vw, 130px);
+}
+
+#problem .fm-spread {
+  gap: clamp(42px, 6.4vw, 96px);
+}
+#problem .fm-margin-notes {
+  margin-top: clamp(60px, 7.2vw, 102px);
+}
+#problem .fm-margin-notes p {
+  min-height: 138px;
+}
+#problem .fm-margin-notes strong {
+  margin-bottom: 36px;
+}
+
+#method .fm-method-head {
+  margin-bottom: clamp(60px, 7vw, 104px);
+}
+#method .fm-method-spread {
+  gap: clamp(36px, 5vw, 72px);
+}
+#method .fm-method-list article {
+  padding-block: 19px 21px;
+}
+
+#system .fm-system-head {
+  margin-bottom: clamp(54px, 6.5vw, 90px);
+}
+#system .fm-deliverables article {
+  min-height: 156px;
+  padding-top: 21px;
+  padding-bottom: 23px;
+}
+#system .fm-deliverables p {
+  margin-top: 12px;
+}
+
+#proof {
+  padding-block: clamp(82px, 9vw, 138px);
+}
+#proof .fm-proof-title {
+  margin-bottom: clamp(62px, 7.4vw, 104px);
+}
+
+@media (max-width: 980px) {
+  #problem,
+  #method,
+  #system {
+    padding-block: 68px;
+  }
+
+  #problem .fm-margin-notes {
+    margin-top: 54px;
+  }
+  #problem .fm-margin-notes p,
+  #problem .fm-margin-notes p + p {
+    padding-block: 18px 22px;
+  }
+
+  #method .fm-method-head {
+    margin-bottom: 54px;
+  }
+
+  #system .fm-system-head {
+    margin-bottom: 50px;
+  }
+  #system .fm-deliverables article,
+  #system .fm-deliverables article:nth-child(even) {
+    min-height: 0;
+    padding-block: 20px 22px;
+  }
+}
+
+@media (max-width: 700px) {
+  #problem,
+  #method,
+  #system {
+    padding-block: 60px;
+  }
+
+  #problem .fm-spread {
+    gap: 34px;
+  }
+  #problem .fm-copy-column h2 {
+    margin-bottom: 20px;
+  }
+  #problem .fm-lede {
+    margin-bottom: 17px;
+  }
+  #problem .fm-margin-notes {
+    margin-top: 42px;
+  }
+  #problem .fm-margin-notes p,
+  #problem .fm-margin-notes p + p {
+    padding-block: 16px 18px;
+  }
+  #problem .fm-margin-notes strong {
+    margin-bottom: 12px;
+  }
+
+  #method .fm-method-head {
+    margin-bottom: 42px;
+  }
+  #method .fm-method-spread {
+    gap: 30px;
+  }
+  #method .fm-method-list article:nth-child(odd),
+  #method .fm-method-list article:nth-child(even) {
+    padding-block: 16px;
+  }
+
+  #system .fm-system-head {
+    margin-bottom: 38px;
+  }
+  #system .fm-deliverables article,
+  #system .fm-deliverables article:nth-child(even) {
+    padding-block: 17px 19px;
+  }
+  #system .fm-deliverables article::before {
+    margin-bottom: 12px;
+  }
+
+  #proof {
+    padding-block: 68px;
+  }
+  #proof .fm-proof-title {
+    margin-bottom: 52px;
+  }
+}

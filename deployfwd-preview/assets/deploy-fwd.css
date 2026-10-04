@@ -1453,3 +1453,89 @@
   0%, 100% { opacity: .35; transform: scaleX(.6); transform-origin: left; }
   50% { opacity: 1; transform: scaleX(1); transform-origin: left; }
 }
+
+
+/* ============================================================
+   Density pass — preserve the pinned acts, tighten the middle
+   ============================================================ */
+.df-flow-section,
+.df-turn-section,
+.df-control-section,
+.df-proof-section {
+  padding-block: clamp(4rem, 7.6vw, 9.5rem);
+}
+
+.df-debt-grid {
+  margin-top: clamp(46px, 6.6vw, 86px);
+}
+.df-debt-grid article {
+  min-height: 214px;
+}
+.df-debt-grid strong {
+  margin-top: 48px;
+}
+
+.df-turn-grid {
+  gap: clamp(38px, 5.8vw, 82px);
+}
+
+.df-control-head {
+  margin-bottom: clamp(46px, 6.6vw, 88px);
+}
+.df-control-scene {
+  min-height: 700px;
+}
+
+.df-proof-steps {
+  margin-top: clamp(46px, 5.8vw, 76px);
+}
+.df-proof-steps article {
+  padding-block: 22px;
+}
+
+@media (max-width: 900px) {
+  .df-flow-section,
+  .df-turn-section,
+  .df-control-section,
+  .df-proof-section {
+    padding-block: clamp(58px, 8vw, 82px);
+  }
+
+  .df-control-scene {
+    min-height: 820px;
+  }
+}
+
+@media (max-width: 640px) {
+  .df-flow-section,
+  .df-turn-section,
+  .df-control-section,
+  .df-proof-section {
+    padding-block: 58px;
+  }
+
+  .df-debt-grid {
+    margin-top: 40px;
+  }
+  .df-debt-grid article,
+  .df-debt-grid article + article {
+    padding-block: 18px;
+  }
+  .df-debt-grid strong {
+    margin-top: 34px;
+  }
+
+  .df-control-head {
+    margin-bottom: 42px;
+  }
+  .df-control-scene {
+    min-height: 900px;
+  }
+
+  .df-proof-steps {
+    margin-top: 40px;
+  }
+  .df-proof-steps article {
+    padding-block: 19px;
+  }
+}
