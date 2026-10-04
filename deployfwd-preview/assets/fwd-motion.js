@@ -10,18 +10,18 @@
   function updateMobileReview() {
     const cta = document.querySelector("[data-mobile-cta]");
     const trigger = document.querySelector("#problem");
-    const peak = document.querySelector("#lock");
+    const stage = document.querySelector(".fm-lock-stage");
     const close = document.querySelector("#close");
-    if (!cta || !trigger || !peak || !close) return;
-    const peakRect = peak.getBoundingClientRect();
-    const peakActive =
-      peakRect.top < window.innerHeight * 0.72 &&
-      peakRect.bottom > window.innerHeight * 0.28;
+    if (!cta || !trigger || !stage || !close) return;
+    const stageRect = stage.getBoundingClientRect();
+    const stageVisible =
+      stageRect.top < window.innerHeight * 0.92 &&
+      stageRect.bottom > window.innerHeight * 0.08;
     const visible =
       window.innerWidth <= 700 &&
       trigger.getBoundingClientRect().top < window.innerHeight * 0.55 &&
       close.getBoundingClientRect().top > window.innerHeight * 0.72 &&
-      !peakActive;
+      !stageVisible;
     cta.classList.toggle("is-visible", visible);
   }
 
@@ -42,17 +42,22 @@
     if (grid) grid.style.gap = gap + "px";
 
     const starts = [
-      {r:-4.5, x:-18, y:12, s:1.08, sat:.62, hue:-12, c:.92},
-      {r:3.8, x:16, y:-9, s:1.12, sat:1.24, hue:14, c:1.12},
-      {r:2.7, x:-12, y:-14, s:1.06, sat:.78, hue:8, c:1.16},
-      {r:-3.2, x:14, y:12, s:1.1, sat:1.16, hue:-9, c:.9}
+      {r:-4.5, x:-18, y:12, s:1.08},
+      {r:3.8, x:16, y:-9, s:1.12},
+      {r:2.7, x:-12, y:-14, s:1.06},
+      {r:-3.2, x:14, y:12, s:1.1}
     ];
+    const mergeStarts = [0.16, 0.34, 0.52, 0.7];
 
     tiles.forEach((tile, i) => {
-      const s = starts[i];
-      const inv = 1 - eased;
-      tile.style.transform = `translate3d(${s.x * inv}px,${s.y * inv}px,0) rotate(${s.r * inv}deg) scale(${1 + (s.s - 1) * inv})`;
-      tile.style.filter = `saturate(${1 + (s.sat - 1) * inv}) hue-rotate(${s.hue * inv}deg) contrast(${1 + (s.c - 1) * inv})`;
+      const start = mergeStarts[i];
+      const merge = reduced ? 1 : clamp((p - start) / 0.18);
+      const align = reduced ? 1 : clamp((p - Math.max(0, start - 0.12)) / 0.3);
+      const state = starts[i];
+      const inv = 1 - align;
+      tile.style.setProperty("--lock-merge", String(merge));
+      tile.style.transform = `translate3d(${state.x * inv}px,${state.y * inv}px,0) rotate(${state.r * inv}deg) scale(${1 + (state.s - 1) * inv})`;
+      tile.style.filter = "none";
     });
 
     rules.forEach((rule, i) => {
@@ -63,7 +68,7 @@
     });
 
     if (status) {
-      status.textContent = p > .82 ? "LOCKED" : p > .28 ? "CONVERGING" : "DRIFT";
+      status.textContent = p > .88 ? "LOCKED" : p > .28 ? "CONVERGING" : "DRIFT";
     }
     if (line) line.style.setProperty("--lock-line", String(eased));
   }

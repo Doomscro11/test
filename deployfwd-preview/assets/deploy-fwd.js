@@ -30,6 +30,16 @@
     const stage = act.querySelector(".df-collapse-stage");
     stage.style.setProperty("--df-left", left + "%");
 
+    const manualCopy = act.querySelector(".df-collapse-copy");
+    if (manualCopy) {
+      const mobile = window.innerWidth <= 700;
+      const dissolve = mobile ? clamp((q - 0.08) / 0.2) : 0;
+      manualCopy.style.opacity = String(1 - dissolve);
+      manualCopy.style.transform = mobile
+        ? `translate3d(${-dissolve * 12}px,0,0)`
+        : "";
+    }
+
     const fragments = [...act.querySelectorAll("[data-fragment]")];
     fragments.forEach((node, i) => {
       const start = 0.08 + i * 0.075;

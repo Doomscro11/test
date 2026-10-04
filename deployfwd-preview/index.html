@@ -10,9 +10,10 @@
   <meta property="og:description" content="A managed operating layer for quoting, scheduling, supplier follow-through, and client status.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://deployfwd.ai/">
-  <meta property="og:image" content="https://deployfwd.ai/assets/deploy-fwd/hero-workflow-1120.webp">
-  <meta property="og:image:width" content="1120">
+  <meta property="og:image" content="https://deployfwd.ai/assets/deploy-fwd/og-card.jpg">
+  <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
+  <meta property="og:image:type" content="image/jpeg">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Deploy FWD | operational systems for custom-order work">
   <meta name="twitter:description" content="A managed operating layer for quoting, scheduling, supplier follow-through, and client status.">
@@ -123,13 +124,19 @@
 
         <div class="df-control-scene">
           <div class="df-control-image" data-sc-parallax="-0.65">
-            <img
-              src="assets/deploy-fwd/hero-home-1120.webp"
-              srcset="assets/deploy-fwd/hero-home-480.webp 480w, assets/deploy-fwd/hero-home-720.webp 720w, assets/deploy-fwd/hero-home-1120.webp 1120w"
-              sizes="(max-width: 900px) 92vw, 66vw"
-              width="1120" height="630"
-              loading="lazy" decoding="async"
-              alt="Precision fabrication shop with CNC work cells, a steel workbench, job travelers and inspection tools">
+            <picture>
+              <source
+                media="(max-width: 640px)"
+                srcset="assets/deploy-fwd/hero-home-mobile-480.webp 480w, assets/deploy-fwd/hero-home-mobile-720.webp 720w, assets/deploy-fwd/hero-home-mobile-928.webp 928w"
+                sizes="100vw">
+              <img
+                src="assets/deploy-fwd/hero-home-1120.webp"
+                srcset="assets/deploy-fwd/hero-home-480.webp 480w, assets/deploy-fwd/hero-home-720.webp 720w, assets/deploy-fwd/hero-home-1120.webp 1120w"
+                sizes="(max-width: 900px) 92vw, 66vw"
+                width="1120" height="630"
+                loading="lazy" decoding="async"
+                alt="Precision fabrication shop with CNC work cells, a steel workbench, job travelers and inspection tools">
+            </picture>
           </div>
           <div class="df-control-plane df-control-plane-a" data-sc-parallax="0.38" aria-hidden="true"></div>
           <div class="df-control-plane df-control-plane-b" data-sc-parallax="0.82" aria-hidden="true"></div>
