@@ -17,7 +17,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Deploy FWD | operational systems for custom-order work">
   <meta name="twitter:description" content="A managed operating layer for quoting, scheduling, supplier follow-through, and client status.">
-  <meta name="twitter:image" content="https://deployfwd.ai/assets/deploy-fwd/hero-workflow-1120.webp">
+  <meta name="twitter:image" content="https://deployfwd.ai/assets/deploy-fwd/og-card.jpg">
   <link rel="canonical" href="https://deployfwd.ai/">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Deploy FWD","url":"https://deployfwd.ai/","email":"hello@deployfwd.ai","description":"Operational systems for quoting, scheduling, supplier follow-through, and client status."}</script>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230d0e0c'/%3E%3Cpath d='M13 20h38v7H13zm0 17h26v7H13z' fill='%23c6502e'/%3E%3C/svg%3E">
@@ -93,6 +93,72 @@
       </div>
     </section>
 
+    <section id="operating-loop-live" class="df-live-section sc-section" data-sc-act="flow">
+      <div class="sc-wrap">
+        <div class="df-live-head" data-sc-in>
+          <div>
+            <p class="df-label">Operating Loop Live</p>
+            <h2>Watch the handoff move.</h2>
+          </div>
+          <p>A representative custom-order workflow. The system carries context forward, pauses for judgment, then resumes without relying on somebody to remember the next step.</p>
+        </div>
+
+        <div class="df-live-shell" data-live-loop>
+          <div class="df-live-toolbar">
+            <span>FIELD SIMULATION / NOT CLIENT TELEMETRY</span>
+            <span data-live-clock>09:14</span>
+            <button type="button" data-live-run>Run operating loop</button>
+          </div>
+
+          <div class="df-live-body">
+            <div class="df-live-stream" role="list" aria-label="Representative operating loop events">
+              <button type="button" role="listitem" data-live-step="0">
+                <span>09:14</span><strong>RFQ received</strong><small>Email + PDF</small>
+              </button>
+              <button type="button" role="listitem" data-live-step="1">
+                <span>09:14</span><strong>Specification extracted</strong><small>Material · Qty · Finish · Due date</small>
+              </button>
+              <button type="button" role="listitem" data-live-step="2">
+                <span>09:15</span><strong>Exception detected</strong><small>Finish conflicts with supplier capability</small>
+              </button>
+              <button type="button" role="listitem" data-live-step="3">
+                <span>09:15</span><strong>Human approval</strong><small>Alternate supplier?</small>
+              </button>
+              <button type="button" role="listitem" data-live-step="4">
+                <span>09:17</span><strong>Supplier ETA requested</strong><small>Context carried automatically</small>
+              </button>
+              <button type="button" role="listitem" data-live-step="5">
+                <span>09:23</span><strong>ETA received</strong><small>Exception cleared</small>
+              </button>
+              <button type="button" role="listitem" data-live-step="6">
+                <span>09:24</span><strong>Schedule updated</strong><small>Next action assigned</small>
+              </button>
+              <button type="button" role="listitem" data-live-step="7">
+                <span>09:24</span><strong>Client status prepared</strong><small>Ready for release</small>
+              </button>
+            </div>
+
+            <div class="df-live-state" aria-live="polite">
+              <div class="df-live-state-head">
+                <span>System state</span>
+                <strong data-live-state-status>READY</strong>
+              </div>
+              <dl>
+                <div><dt>Current owner</dt><dd data-live-owner>Intake</dd></div>
+                <div><dt>Next action</dt><dd data-live-next>Parse RFQ</dd></div>
+                <div><dt>Human gate</dt><dd data-live-gate>None</dd></div>
+                <div><dt>Client state</dt><dd data-live-client>Unchanged</dd></div>
+              </dl>
+              <div class="df-live-state-foot">
+                <span>Supervised operating layer</span>
+                <b data-live-progress>0 / 8</b>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="df-turn-section sc-section" data-sc-act="flow">
       <div class="sc-wrap df-turn-grid">
         <div class="df-turn-copy" data-sc-in>
@@ -147,6 +213,50 @@
             <div><dt>Execution</dt><dd>12 MCP servers</dd><p>Quoting, jobs, suppliers, communication, accounting, and records.</p></div>
           </dl>
         </div>
+
+        <div class="df-trust-strip" data-sc-in data-sc-stagger="45">
+          <article><span>01</span><strong>Human approval</strong><p>Sensitive actions can stop at an explicit decision gate.</p></article>
+          <article><span>02</span><strong>Observable state</strong><p>Every handoff should expose an owner, state, and next action.</p></article>
+          <article><span>03</span><strong>Explicit context</strong><p>Operating memory is written down instead of hiding in one person’s head.</p></article>
+          <article><span>04</span><strong>Controlled change</strong><p>Workflows expand only after the useful path is proven and reviewable.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="df-evidence-section sc-section" data-sc-act="flow">
+      <div class="sc-wrap">
+        <div class="df-evidence-head" data-sc-in>
+          <p class="df-label">Systems in evidence</p>
+          <h2>Show the failure. Show the control.</h2>
+          <p>Proof is labeled by maturity. A prototype is not a deployment, and a field simulation is not a client result.</p>
+        </div>
+
+        <div class="df-evidence-register">
+          <article data-sc-in>
+            <div><span>WORKING PROTOTYPE</span><strong>Quote intake</strong></div>
+            <dl>
+              <div><dt>Failure</dt><dd>RFQ facts are rebuilt from email and attachments.</dd></div>
+              <div><dt>Control</dt><dd>Structured extraction with exception routing.</dd></div>
+              <div><dt>Artifact</dt><dd>Parsed quote packet + approval gate.</dd></div>
+            </dl>
+          </article>
+          <article data-sc-in>
+            <div><span>INTERNAL SYSTEM</span><strong>Supplier follow-through</strong></div>
+            <dl>
+              <div><dt>Failure</dt><dd>ETAs live in inboxes and manual follow-up.</dd></div>
+              <div><dt>Control</dt><dd>Persistent supplier state and next-action ownership.</dd></div>
+              <div><dt>Artifact</dt><dd>Follow-up queue + exception register.</dd></div>
+            </dl>
+          </article>
+          <article data-sc-in>
+            <div><span>FIELD SIMULATION</span><strong>Client status loop</strong></div>
+            <dl>
+              <div><dt>Failure</dt><dd>Customers ask because the operation did not tell them first.</dd></div>
+              <div><dt>Control</dt><dd>Status preparation triggered by schedule state.</dd></div>
+              <div><dt>Artifact</dt><dd>Release-ready client update with human approval.</dd></div>
+            </dl>
+          </article>
+        </div>
       </div>
     </section>
 
@@ -155,6 +265,42 @@
         <div class="df-proof-line" data-sc-in>
           <p class="df-label">Engagement</p>
           <h2>Audit first. Deployment earns the right to expand.</h2>
+        </div>
+
+        <div class="df-audit-package" data-sc-in>
+          <div class="df-audit-copy">
+            <span>AUDIT OUTPUT / 07 ARTIFACTS</span>
+            <h3>$2,000 buys a decision package.</h3>
+            <p>The audit is designed to leave the buyer with a usable operating map whether or not deployment proceeds.</p>
+          </div>
+          <ol>
+            <li><b>01</b><span>Workflow map</span></li>
+            <li><b>02</b><span>Handoff failure register</span></li>
+            <li><b>03</b><span>Automation suitability matrix</span></li>
+            <li><b>04</b><span>Human-control map</span></li>
+            <li><b>05</b><span>Integration map</span></li>
+            <li><b>06</b><span>ROI / effort model</span></li>
+            <li><b>07</b><span>90-day deployment sequence</span></li>
+          </ol>
+
+          <div class="df-audit-preview">
+            <div class="df-audit-preview-head">
+              <span>SAMPLE ARTIFACT / HANDOFF REGISTER</span>
+              <span>ILLUSTRATIVE · NOT CLIENT DATA</span>
+            </div>
+            <div class="df-audit-preview-row is-head">
+              <span>Handoff</span><span>Impact</span><span>Suitability</span><span>Human control</span>
+            </div>
+            <div class="df-audit-preview-row">
+              <strong>Quote exception</strong><span>High</span><span>Assist</span><span>Approve deviation</span>
+            </div>
+            <div class="df-audit-preview-row">
+              <strong>Supplier ETA</strong><span>High</span><span>Automate</span><span>Escalate exception</span>
+            </div>
+            <div class="df-audit-preview-row">
+              <strong>Client status</strong><span>Medium</span><span>Draft + trigger</span><span>Release gate</span>
+            </div>
+          </div>
         </div>
 
         <div class="df-proof-steps" data-register="ENGAGEMENT REGISTER">
@@ -176,6 +322,21 @@
             <p>per month</p>
             <small>Exception handling, tuning, operating memory, and capability expansion.</small>
           </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="df-fit-section sc-section" data-sc-act="flow">
+      <div class="sc-wrap">
+        <div class="df-fit-head" data-sc-in>
+          <p class="df-label">Where handoff debt compounds</p>
+          <h2>Best fit: custom work with real exceptions.</h2>
+        </div>
+        <div class="df-fit-grid" data-sc-in data-sc-stagger="40">
+          <article><span>01</span><strong>Fabrication + custom manufacturing</strong><p>Quote detail, supplier timing, work-cell scheduling, client status.</p><a href="deploy-fwd-industries.html#fabrication">Explore route ↗</a></article>
+          <article><span>02</span><strong>Construction + trades</strong><p>Site conditions, approvals, materials, schedule changes, field follow-through.</p><a href="deploy-fwd-industries.html#construction">Explore route ↗</a></article>
+          <article><span>03</span><strong>Field service</strong><p>Dispatch context, parts, technician state, exceptions, customer updates.</p><a href="deploy-fwd-industries.html#field-service">Explore route ↗</a></article>
+          <article><span>04</span><strong>Specialty distribution</strong><p>Custom quotes, vendor dependencies, inventory exceptions, delivery status.</p><a href="deploy-fwd-industries.html#distribution">Explore route ↗</a></article>
         </div>
       </div>
     </section>

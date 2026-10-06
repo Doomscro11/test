@@ -11,17 +11,23 @@
     const cta = document.querySelector("[data-mobile-cta]");
     const trigger = document.querySelector("#problem");
     const stage = document.querySelector(".fm-lock-stage");
+    const system = document.querySelector("#system");
     const close = document.querySelector("#close");
-    if (!cta || !trigger || !stage || !close) return;
+    if (!cta || !trigger || !stage || !system || !close) return;
     const stageRect = stage.getBoundingClientRect();
+    const systemRect = system.getBoundingClientRect();
     const stageVisible =
       stageRect.top < window.innerHeight * 0.92 &&
       stageRect.bottom > window.innerHeight * 0.08;
+    const systemVisible =
+      systemRect.top < window.innerHeight * 0.92 &&
+      systemRect.bottom > window.innerHeight * 0.08;
     const visible =
       window.innerWidth <= 700 &&
       trigger.getBoundingClientRect().top < window.innerHeight * 0.55 &&
       close.getBoundingClientRect().top > window.innerHeight * 0.72 &&
-      !stageVisible;
+      !stageVisible &&
+      !systemVisible;
     cta.classList.toggle("is-visible", visible);
   }
 

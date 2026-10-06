@@ -7,15 +7,148 @@
     return clamp(-rect.top / travel);
   }
 
+  const liveStates = [
+    {clock:"09:14", status:"INTAKE", owner:"Intake", next:"Parse RFQ", gate:"None", client:"Unchanged"},
+    {clock:"09:14", status:"PARSED", owner:"Quote prep", next:"Validate specification", gate:"None", client:"Unchanged"},
+    {clock:"09:15", status:"EXCEPTION", owner:"Quote prep", next:"Resolve supplier conflict", gate:"Required", client:"Unchanged"},
+    {clock:"09:15", status:"AWAITING APPROVAL", owner:"Human approver", next:"Approve alternate supplier", gate:"Active", client:"Unchanged"},
+    {clock:"09:17", status:"FOLLOW-UP", owner:"Supplier loop", next:"Receive ETA", gate:"Cleared", client:"Unchanged"},
+    {clock:"09:23", status:"ETA CONFIRMED", owner:"Scheduler", next:"Recalculate schedule", gate:"Cleared", client:"Unchanged"},
+    {clock:"09:24", status:"SCHEDULED", owner:"Client loop", next:"Prepare client status", gate:"None", client:"Pending update"},
+    {clock:"09:24", status:"READY", owner:"Human approver", next:"Release client status", gate:"Release gate", client:"Ready for release"}
+  ];
+
+  function initLiveLoop() {
+    const root = document.querySelector("[data-live-loop]");
+    if (!root) return;
+    const steps = [...root.querySelectorAll("[data-live-step]")];
+    const run = root.querySelector("[data-live-run]");
+    const fields = {
+      clock: root.querySelector("[data-live-clock]"),
+      status: root.querySelector("[data-live-state-status]"),
+      owner: root.querySelector("[data-live-owner]"),
+      next: root.querySelector("[data-live-next]"),
+      gate: root.querySelector("[data-live-gate]"),
+      client: root.querySelector("[data-live-client]"),
+      progress: root.querySelector("[data-live-progress]")
+    };
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let timer = 0;
+    let current = -1;
+
+    function render(index) {
+      current = clamp(index, 0, liveStates.length - 1);
+      steps.forEach((step, i) => {
+        const active = i === current;
+        const complete = i < current;
+        step.classList.toggle("is-active", active);
+        step.classList.toggle("is-complete", complete);
+        step.setAttribute("aria-current", active ? "step" : "false");
+      });
+      const state = liveStates[current];
+      if (fields.clock) fields.clock.textContent = state.clock;
+      if (fields.status) fields.status.textContent = state.status;
+      if (fields.owner) fields.owner.textContent = state.owner;
+      if (fields.next) fields.next.textContent = state.next;
+      if (fields.gate) fields.gate.textContent = state.gate;
+      if (fields.client) fields.client.textContent = state.client;
+      if (fields.progress) fields.progress.textContent = String(current + 1) + " / " + String(liveStates.length);
+    }
+
+    function stop(label) {
+      if (timer) window.clearInterval(timer);
+      timer = 0;
+      if (run) {
+        run.disabled = false;
+        run.textContent = label || (current >= liveStates.length - 1 ? "Run again" : "Run operating loop");
+      }
+    }
+
+    function continueFromGate() {
+      root.classList.remove("is-gated");
+      render(4);
+      if (run) {
+        run.disabled = true;
+        run.textContent = "Running…";
+      }
+      timer = window.setInterval(() => {
+        const next = current + 1;
+        if (next >= liveStates.length) {
+          stop();
+          return;
+        }
+        render(next);
+      }, 900);
+    }
+
+    function play() {
+      stop();
+      root.classList.remove("is-gated");
+      render(0);
+      if (reduced) {
+        render(liveStates.length - 1);
+        stop();
+        return;
+      }
+      if (run) {
+        run.disabled = true;
+        run.textContent = "Running…";
+      }
+      timer = window.setInterval(() => {
+        const next = current + 1;
+        if (next >= liveStates.length) {
+          stop();
+          return;
+        }
+        render(next);
+        if (next === 3) {
+          window.clearInterval(timer);
+          timer = 0;
+          root.classList.add("is-gated");
+          stop("Approve alternate supplier");
+        }
+      }, 900);
+    }
+
+    steps.forEach((step, i) => {
+      step.addEventListener("click", () => {
+        stop();
+        render(i);
+      });
+    });
+    if (run) {
+      run.addEventListener("click", () => {
+        if (root.classList.contains("is-gated") && current === 3) {
+          continueFromGate();
+        } else {
+          play();
+        }
+      });
+    }
+    render(0);
+  }
+
   function updateMobileAudit() {
     const cta = document.querySelector("[data-mobile-cta]");
     const trigger = document.querySelector(".df-flow-section");
+    const live = document.querySelector(".df-live-section");
+    const proof = document.querySelector(".df-proof-section");
     const close = document.querySelector("[data-df-collapse]");
-    if (!cta || !trigger || !close) return;
+    if (!cta || !trigger || !live || !proof || !close) return;
+    const liveRect = live.getBoundingClientRect();
+    const proofRect = proof.getBoundingClientRect();
+    const liveVisible =
+      liveRect.top < window.innerHeight * 0.92 &&
+      liveRect.bottom > window.innerHeight * 0.08;
+    const proofVisible =
+      proofRect.top < window.innerHeight * 0.92 &&
+      proofRect.bottom > window.innerHeight * 0.08;
     const visible =
       window.innerWidth <= 700 &&
       trigger.getBoundingClientRect().top < window.innerHeight * 0.55 &&
-      close.getBoundingClientRect().top > window.innerHeight * 0.72;
+      close.getBoundingClientRect().top > window.innerHeight * 0.72 &&
+      !liveVisible &&
+      !proofVisible;
     cta.classList.toggle("is-visible", visible);
   }
 
@@ -105,6 +238,8 @@
       }
     });
   });
+
+  initLiveLoop();
 
   if (window.ScrollCraft) {
     window.ScrollCraft.mount(document.body);
