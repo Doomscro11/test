@@ -2542,3 +2542,64 @@
     gap: 5px;
   }
 }
+
+
+/* ============================================================
+   Buyer journey — proof first, offer always legible
+   ============================================================ */
+.fm-title-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 22px;
+  align-items: center;
+}
+
+.fm-title-actions a {
+  min-height: 44px;
+}
+
+.fm-title-actions a:last-child {
+  color: #8f341f;
+}
+
+.fm-studies-foot > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 22px;
+  justify-content: flex-end;
+}
+
+.fm-studies-foot a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 36px;
+  color: inherit;
+  text-decoration: none;
+}
+
+.fm-studies-foot a:last-child {
+  color: var(--fm-red);
+}
+
+.fm-sprint-copy > small {
+  display: block;
+  max-width: 42ch;
+  margin-top: 6px;
+  color: #766e65;
+  font: 600 9px/1.45 var(--fm-mono);
+  letter-spacing: .03em;
+}
+
+@media (max-width: 700px) {
+  .fm-title-actions {
+    gap: 0 16px;
+  }
+
+  .fm-title-actions a {
+    min-height: 40px;
+  }
+
+  .fm-studies-foot > div {
+    justify-content: flex-start;
+  }
+}
